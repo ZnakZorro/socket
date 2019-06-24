@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Socket.io</title>
+    </head>
+ 
+    <body>
+        <h1>1 Communication with socket.io!</h1>
+
+        <script src="/socket.io/socket.io.js"></script>
+		<!--script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script-->
+        <script>
+            var socket = io.connect('http://82.145.73.108:8282/');
+			  socket.on('news', function (data) {
+				console.log(data);
+				socket.emit('informacje', { my: 'data' });
+			});			
+			socket.emit('informacje', { my: 'data' });
+			setInterval(function(){
+				var czas = (new Date()).toLocaleString();
+				socket.emit('informacje', { my: 'data',clientDate:czas });
+			},5000)
+		
+			
+        </script>
+    </body>
+</html>
